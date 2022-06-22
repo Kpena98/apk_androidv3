@@ -34,20 +34,25 @@ public class PaymentPage extends AndroidBase {
     }
 
     public void paymentData(String metodoPago, String codigo) {
-        clickId("btPayMethod");
-        hp.sleep(5);
         try {
-            fastTypeId("firstNameText", "Prueba");
-            fastTypeId("lastNameText", "Prueba");
-            fastTypeId("suffixText", "9 2131 2124");
-            fastTypeId("documentText", "27321231-0");
-            clickId("btConfirm");
-        }
-        catch (org.openqa.selenium.TimeoutException ex){
+            clickId("btPayMethod");
+            hp.sleep(5);
+            try {
+                fastTypeId("firstNameText", "Prueba");
+                fastTypeId("lastNameText", "Prueba");
+                fastTypeId("suffixText", "9 2131 2124");
+                fastTypeId("documentText", "27321231-0");
+                clickId("btConfirm");
+            } catch (org.openqa.selenium.TimeoutException ex) {
 
+            }
+            codigoPromocional(codigo);
+            click("//*[@class='android.widget.TextView' and @text='" + metodoPago + "']");
+            Logger.pass("Se ingresa codigo promocional valido exclusivamente para chile " + codigo + " y  se selecciona el metodo de pago: " + metodoPago);
         }
-        codigoPromocional(codigo);
-        click("//*[@class='android.widget.TextView' and @text='" + metodoPago + "']");
+        catch (org.openqa.selenium.TimeoutException | org.openqa.selenium.NoSuchElementException ex){
+            Logger.error("No se pudo ingresar a la pasarela de pago");
+        }
     }
 
 
@@ -55,9 +60,9 @@ public class PaymentPage extends AndroidBase {
     public void pay(String nTarjeta, String Fvencimiento, String cvv) {
         String month = Fvencimiento.split("/")[0];
         String year = Fvencimiento.split("/")[1];
-        hp.sleep(10);
-        clickId("btPay");
+        hp.sleep(2);
         try {
+            clickId("btPay");
             if (findElement("//*[contains(@text, \"Get the most\")]").isDisplayed()) {
                 clickId("tvSkip");
             }
@@ -83,6 +88,7 @@ public class PaymentPage extends AndroidBase {
                         clickId("com.mcdo.mcdonalds_debug.debug:id/btReady");
                         clickId("btn_accept_delivery");
                         clickId("com.mcdo.mcdonalds_debug.debug:id/btReady");
+                        Logger.pass("Se realiza pago con tarjeta de credito");
                     } catch (org.openqa.selenium.TimeoutException ex) {
 
                     }
@@ -92,11 +98,6 @@ public class PaymentPage extends AndroidBase {
             } catch (org.openqa.selenium.TimeoutException ex){
                 Logger.error("El pago no se realizo de forma correcta");
                 }
-
-
-            hp.sleep(15);
-
-
         }
         catch (org.openqa.selenium.TimeoutException ex){
         }
@@ -107,9 +108,10 @@ public class PaymentPage extends AndroidBase {
         String month = Fvencimiento.split("/")[0];
         String year = Fvencimiento.split("/")[1];
         hp.sleep(10);
-        clickId("btPay");
-        comprobarBadLogin();
+
         try {
+            clickId("btPay");
+            comprobarBadLogin();
             if (findElement("//*[contains(@text, \"Get the most\")]").isDisplayed()) {
                 clickId("tvSkip");
             }
@@ -136,7 +138,7 @@ public class PaymentPage extends AndroidBase {
                             clickId("btHelp");
                             click("//android.widget.TextView[contains(@text, 'McDelivery')]//ancestor::android.view.ViewGroup//following-sibling::android.widget.LinearLayout//descendant::android.widget.Button[contains(@text, 'Track my order')]");
                         }
-
+                        Logger.pass("Se realiza pago con tarjeta de credito");
                     } catch (org.openqa.selenium.TimeoutException ex) {
                         Logger.error("No se encontro mensaje de retiro ");
                     }
@@ -148,11 +150,10 @@ public class PaymentPage extends AndroidBase {
             }
 
 
-            hp.sleep(15);
-
 
         }
-        catch (org.openqa.selenium.TimeoutException ex){
+        catch (org.openqa.selenium.TimeoutException | org.openqa.selenium.NoSuchElementException ex){
+            Logger.error("No se pudo realizar el pago");
         }
 
     }

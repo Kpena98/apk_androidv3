@@ -34,8 +34,8 @@ public class DriverManager {
         caps.setCapability("browserstack.local", "false");
         caps.setCapability("browserstack.selenium_version", "4.1.2");
         caps.setCapability("browserstack.networkProfile", "4g-lte-advanced-good");
-        caps.setCapability("app", url); // APP subida desde bitrise
-        //caps.setCapability("app", "bs://91f18527d0cfea333e985d7e9ea5ef0163286333"); // Quality App
+        //caps.setCapability("app", url); // APP subida desde bitrise
+        caps.setCapability("app", "bs://b751655f850a8d5d0017dc107e0dade791efc4c0"); // Quality App
         //caps.setCapability("app", "bs://feaa681f1b248078ce267746529a846e40886278"); // Quality 3.11 debug webweiv
        //caps.setCapability("app", "bs://11c7ef13c1db0a4293e3114f60954df8cea3fce8");
 

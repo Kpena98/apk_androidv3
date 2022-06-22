@@ -31,16 +31,21 @@ public class AndroidSteps {
 
     @When("Dentro del mercado de {string} acceder a pedidos y hacer login con {string} y {string} registrada")
     public void dentroDelMercadoDeAccederAPedidosYHacerLoginConYRegistrada(String pais, String user, String pass) throws ElementoNoVisibleException, InterruptedException {
+        try {
         mp.comprobarMensajes();
         boolean loginAvaible = mp.comprobarLogin();
         if (loginAvaible) {
             mp.login(user, pass);
+            Logger.pass("Login correcto con el usuario: " + user + " y la contraseña: " + pass + " en el pais: " + pais);
         }
         else {
             mp.goToLogin(user, pass);
+            Logger.pass("Login correcto con el usuario: " + user + " y la contraseña: " + pass + " en el pais: " + pais);
         }
-        mp.comprobarPolicy();
-        Logger.pass("Login correcto con el usuario: " + user + " y la contraseña: " + pass + " en el pais: " + pais);
+        mp.comprobarPolicy();}
+        catch (org.openqa.selenium.TimeoutException | org.openqa.selenium.NoSuchElementException ex){
+            Logger.error("No se puedo hacer login");
+        }
 
     }
 
@@ -51,7 +56,7 @@ public class AndroidSteps {
         op.initOrder(direccion);
         op.selectCategory(categoria);
         op.selectOrder(producto);
-        Logger.pass("Se inicia orden de tipo delivery en la dirección " + direccion +" eligiendo el siguiente producto: "+ producto );
+
     }
 
     @Then("Iniciar orden tipo pickup indicar {string}  seleccionar {string} y {string}")
@@ -66,43 +71,47 @@ public class AndroidSteps {
     @And("Seleccionar bebida {string}")
     public void seleccionarBebida(String bebida) throws InterruptedException {
         op.selectDrink(bebida);
-        Logger.pass("Selecciono bebida: " + bebida);
+
     }
 
 
     @And("Quitar {string} y confirmar orden")
     public void quitarYConfirmarOrden(String ingrediente) {
-        op.removeIngredient(ingrediente);
-        op.confirmOrder();
-        Logger.pass("Se confirma orden quitando el ingrediente: " + ingrediente);
+        try {
+            op.removeIngredient(ingrediente);
+            op.confirmOrder();
+            Logger.pass("Se confirma orden quitando el ingrediente: " + ingrediente);
+        }
+        catch (org.openqa.selenium.TimeoutException | org.openqa.selenium.NoSuchElementException ex) {
+            Logger.error("No se pudo quitar el ingrediente: " + ingrediente);
+        }
+
     }
 
     @And("Editar {string} y guardar pedido")
     public void editarYGuardarPedido(String ingrediente) {
         op.editIngredient(ingrediente);
         op.saveOrder();
-        Logger.pass("Se guarda pedido editando el ingrediente: " + ingrediente);
-
     }
 
 
     @Then("Dentro de pasarela de pago ingresar datos de tarjeta de credito con numero de tarjeta {string} y fecha de vencimiento {string} y codigo de seguridad {string}")
     public void dentroDePasarelaDePagoIngresarDatosDeTarjetaDeCreditoConNumeroDeTarjetaYFechaDeVencimientoYCodigoDeSeguridad(String nTarjeta, String Fvencimiento, String cvv) {
         pp.pay(nTarjeta, Fvencimiento, cvv);
-        Logger.pass("Se realiza pago con tarjeta de credito");
+
     }
 
 
     @Then("Dentro de pasarela de delivery pago ingresar datos de tarjeta de credito con numero de tarjeta {string} y fecha de vencimiento {string} y codigo de seguridad {string}")
     public void dentroDePasarelaDeDeliveryPagoIngresarDatosDeTarjetaDeCreditoConNumeroDeTarjetaYFechaDeVencimientoYCodigoDeSeguridad(String nTarjeta, String Fvencimiento, String cvv) {
         pp.payDelivery(nTarjeta, Fvencimiento, cvv);
-        Logger.pass("Se realiza pago con tarjeta de credito");
+
     }
 
     @When("Realizar pago, anadir codigo promocional {string}, seleccionar tipo de pago {string} y presionar boton  pagar")
     public void realizarPagoAnadirCodigoPromocionalSeleccionarTipoDePagoYPresionarBotonPagar(String codigo, String metodoPago) {
         pp.paymentData(metodoPago, codigo);
-        Logger.pass("Se ingresa codigo promocional valido exclusivamente para chile " + codigo + " y  se selecciona el metodo de pago: " + metodoPago);
+
     }
 
 }

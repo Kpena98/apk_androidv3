@@ -67,10 +67,18 @@ public class OrdersPage extends AndroidBase {
                         try {
                             click("(//android.widget.TextView[contains(@text, '" + dir[0] + "')])[1]");
                         }
-                        catch (TimeoutException  ex){
-                            click("//*[class='android.widget.TextView' and @id='cl_home__item_profile']");
+
+                        catch (org.openqa.selenium.TimeoutException  ex){
+                            try {
+                                click("//*[class='android.widget.TextView' and @id='cl_home__item_profile']");
+                            }
+                            catch (org.openqa.selenium.TimeoutException | org.openqa.selenium.NoSuchElementException ex2){
+                                Logger.error("No se encontro la direccion ingresada");
+                            }
+
                         }
                         clickId("btn_confirm_address");
+                        Logger.pass("Se inicia orden de tipo delivery en la dirección " + direccion);
                     } catch (org.openqa.selenium.TimeoutException | org.openqa.selenium.NoSuchElementException ex) {
                         try {
                             typeId("edtCityDelivery", dir[1] + "," + dir[2]);
@@ -78,9 +86,11 @@ public class OrdersPage extends AndroidBase {
                             typeId("edtStreetDelivery", dir[0]);
                             clickId("btnConfirmAddress");
                         }
-                        catch (org.openqa.selenium.TimeoutException| org.openqa.selenium.NoSuchElementException  ex2){
+                        catch (org.openqa.selenium.TimeoutException| org.openqa.selenium.NoSuchElementException | java.lang.ArrayIndexOutOfBoundsException ex2){
+                            Logger.error("No se encontro el elemento direccion");
                         }
                     }
+
 
             }
             catch (org.openqa.selenium.TimeoutException | org.openqa.selenium.NoSuchElementException ex){
@@ -91,7 +101,6 @@ public class OrdersPage extends AndroidBase {
 
         }
         catch (org.openqa.selenium.TimeoutException ex){
-            Logger.error("No se encontro el pedido ");
         }
     }
 
@@ -125,9 +134,10 @@ public class OrdersPage extends AndroidBase {
             }catch (TimeoutException ex){
                 clickId("btYellow");
             }
+            Logger.pass("Se inicia orden de tipo pickup en la tienda de  " + direccion);
         }
         catch (org.openqa.selenium.TimeoutException ex){
-            Logger.error("No se encontro el pedido ");
+
         }
     }
 
@@ -135,8 +145,9 @@ public class OrdersPage extends AndroidBase {
         hp.sleep(5);
         try {
             scrollAndFind(producto);
-        } catch (org.openqa.selenium.TimeoutException ex) {
-            Logger.error("No se encontro el elemento Pedidos");
+            Logger.pass("Se elige el siguiente producto: "+ producto );
+        } catch (org.openqa.selenium.TimeoutException | org.openqa.selenium.NoSuchElementException ex) {
+            Logger.error("No se encontro el producto: " + producto);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -146,8 +157,8 @@ public class OrdersPage extends AndroidBase {
     public void removeIngredient(String ingrediente) {
         try {
             scrollAndFind("Customize ingredients");
-        } catch (org.openqa.selenium.TimeoutException ex) {
-            Logger.error("No se encontro el elemento Pedidos");
+        } catch (org.openqa.selenium.TimeoutException | org.openqa.selenium.NoSuchElementException ex) {
+            Logger.error("No se encontro Customize ingredients");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -210,18 +221,26 @@ public class OrdersPage extends AndroidBase {
                         Logger.error("No se encontro el ingrediente " + ingrediente);
                     }
                 }
+                Logger.pass("Se guarda pedido editando el ingrediente: " + ingrediente);
             } catch (org.openqa.selenium.TimeoutException ex) {
                 Logger.error("No se encontro el ingrediente" + ingrediente);
             }
+            clickId("btConfirm");
+            clickId("btAddProduct");
         } catch (org.openqa.selenium.TimeoutException ex) {
             Logger.error("No se pudo editar el pedido");
         }
-        clickId("btConfirm");
-        clickId("btAddProduct");
+
     }
 
     public void selectDrink(String soda) throws InterruptedException {
-        scrollAndFind(soda);
+        try {
+            scrollAndFind(soda);
+            Logger.pass("Selecciono bebida: " + soda);
+        }catch (org.openqa.selenium.TimeoutException | org.openqa.selenium.NoSuchElementException ex){
+            Logger.error("No se pudo cambiar la bebida " + soda);
+        }
+
     }
 
     public void saveOrder() {
@@ -233,7 +252,7 @@ public class OrdersPage extends AndroidBase {
             scrollH(categoria);
             scrollAndFind(categoria);
         } catch (org.openqa.selenium.TimeoutException | org.openqa.selenium.NoSuchElementException ex) {
-            Logger.error("No se encontro el elemento Pedidos");
+            Logger.error("No se encontro la categoria " + categoria);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

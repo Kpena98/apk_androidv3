@@ -1,0 +1,57 @@
+plugins {
+    id 'java'
+}
+
+group 'cl.tsoft'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+
+    implementation group: 'io.cucumber', name: 'cucumber-core', version: '7.2.3'
+    implementation group: 'io.cucumber', name: 'cucumber-java', version: '7.2.3'
+    implementation group: 'io.appium', name:'java-client', version: '7.6.0'
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
+
+    implementation group: 'com.aventstack', name: 'extentreports', version: '4.0.9'
+
+    implementation group: 'org.slf4j', name: 'slf4j-reload4j', version: '1.7.36'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+configurations {
+    cucumberRuntime {
+        extendsFrom implementation
+    }
+}
+
+
+task smokeTest() {
+    dependsOn assemble, compileTestJava
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--threads', '5', '--plugin', 'pretty', '--glue', 'cucumber', 'src/test/resources/features/android',  '--tags', '@smokeTest']
+        }
+    }
+}
+
+task regresion() {
+    dependsOn assemble, compileTestJava
+    doLast {
+        javaexec {
+            main = "io.cucumber.core.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--threads', '5', '--plugin', 'pretty', '--glue', 'cucumber', 'src/test/resources/features/android', '--tags', '@regresion']
+        }
+    }
+}

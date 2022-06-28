@@ -40,7 +40,7 @@ task smokeTest() {
         javaexec {
             main = "io.cucumber.core.cli.Main"
             classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
-            args = ['--threads', '5', '--plugin', 'pretty', '--glue', 'cucumber', 'src/test/resources/features/android',  '--tags', '@smokeTest']
+            args = ['--threads', '5', '--plugin', 'pretty', '--plugin', 'json:src/test/resources/output/report/Cucumber.json', '--glue', 'cucumber', 'src/test/resources/features/android',  '--tags', '@smokeTest']
         }
     }
 }

@@ -16,8 +16,7 @@ public class DriverManager {
     private static ThreadLocal<AndroidDriver<AndroidElement>> driver = new ThreadLocal<>();
 
     private static String url = System.getenv("URLBS");
-    System.out.println("app = " + System.getenv("URLBS"));
-    System.out.println("app = " + url);
+
 
 
     public static final String URL = "https://" + BrowserStackHelper.USERNAME + ":"
@@ -26,6 +25,8 @@ public class DriverManager {
 
 
     public void iniciarWebDriver(String testName) throws MalformedURLException {
+        System.out.println("app = " + System.getenv("URLBS"));
+        System.out.println("app = " + url);
         DesiredCapabilities caps = new DesiredCapabilities();
 
         caps.setCapability("device", "Google Pixel 5");
@@ -35,8 +36,8 @@ public class DriverManager {
         caps.setCapability("browserstack.local", "false");
         caps.setCapability("browserstack.selenium_version", "4.1.2");
         caps.setCapability("browserstack.networkProfile", "4g-lte-advanced-good");
-        //caps.setCapability("app", url); // APP subida desde bitrise
-        caps.setCapability("app", "bs://b751655f850a8d5d0017dc107e0dade791efc4c0"); // Quality App
+        caps.setCapability("app", url); // APP subida desde bitrise
+        //caps.setCapability("app", "bs://b751655f850a8d5d0017dc107e0dade791efc4c0"); // Quality App
         //caps.setCapability("app", "bs://feaa681f1b248078ce267746529a846e40886278"); // Quality 3.11 debug webweiv
        //caps.setCapability("app", "bs://11c7ef13c1db0a4293e3114f60954df8cea3fce8");
 

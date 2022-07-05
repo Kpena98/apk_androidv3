@@ -16,7 +16,8 @@ public class DriverManager {
     private static ThreadLocal<AndroidDriver<AndroidElement>> driver = new ThreadLocal<>();
 
     private static String url = System.getenv("URLBS");
-
+    System.out.println("app = " + System.getenv("URLBS"));
+    System.out.println("app = " + url);
 
 
     public static final String URL = "https://" + BrowserStackHelper.USERNAME + ":"

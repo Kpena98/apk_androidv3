@@ -5,7 +5,9 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
+import dataProvider.jsonDataReader;
 import driver.DriverManager;
+import exceptions.ElementoNoVisibleException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -21,11 +23,14 @@ public class ExtentReportHelper {
     private static ExtentHtmlReporter htmlReporter;
     private static ExtentReports report;
 
+    private static final Helpers hp = new Helpers();
+
     private static ThreadLocal<ExtentTest> extent_test = new ThreadLocal<ExtentTest>();
     private static ThreadLocal<Integer> step = new ThreadLocal<Integer>();
 
 
     public static void startReport( String context, String host, String ambiente) throws IOException {
+        System.out.println("Number of threads " + Thread.activeCount());
         String nameReport = "flujoEndToEnd";
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYYHH:mm:ss");
         Date fecha = new Date();
@@ -60,8 +65,9 @@ public class ExtentReportHelper {
         return s;
     }
 
-    public static void creteNameTest(String nameTest) {
-        extent_test.set(report.createTest(nameTest));
+    public static void creteNameTest(String nameTest) throws IOException, ElementoNoVisibleException {
+        String newNameTest = hp.changeNameTest(nameTest);
+        extent_test.set(report.createTest(newNameTest));
     }
 
     public static void stepPass(String desc) throws IOException, URISyntaxException {

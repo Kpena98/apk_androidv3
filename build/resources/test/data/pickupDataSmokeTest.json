@@ -1,0 +1,36 @@
+[
+  {
+  "Pais": "Colombia",
+  "User": "pruebaautoqacol@gmail.com",
+  "Pass": "Pruebas_2022",
+  "Tienda": "Calle 125",
+  "Categoria": "McPollo Crispy",
+  "Producto": "McCombo™ Grande McPollo Crispy",
+  "Bebida": "Sprite",
+  "Ingrediente": "Mayonesa",
+  "IngredienteExtra": "Queso Cheddar",
+  "Codigo": "TSOFT",
+  "TipoPago": "card",
+  "NumeroTarjeta": "5254133674403564",
+  "FechaVencimiento": "11/25",
+  "CodigoSeguridad": "123",
+  "NombreTarjeta": "APRO"
+  },
+  {
+    "Pais": "Brasil",
+    "User": "pruebaautoqabra@gmail.com",
+    "Pass": "Pruebas_2022",
+    "Tienda": "Rua Funchal, 500",
+    "Categoria": "Grandes Fomes",
+    "Producto": "McOferta Média Big Mac",
+    "Bebida": "Fanta Guaraná 400ml",
+    "Ingrediente": "Sal",
+    "IngredienteExtra": "Fatia Queijo Cheddar",
+    "Codigo": "TSOFT",
+    "TipoPago": "creditCard",
+    "NumeroTarjeta": "5555341244441115",
+    "FechaVencimiento": "03/30",
+    "CodigoSeguridad": "737",
+    "NombreTarjeta": "APRO"
+  }
+]

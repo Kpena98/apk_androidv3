@@ -1,22 +1,15 @@
 package android;
 
 import driver.DriverManager;
-import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.AndroidElement;
-import io.appium.java_client.touch.TapOptions;
-import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.*;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.Helpers;
 
 import java.util.List;
-import java.util.Set;
 
-import static io.appium.java_client.touch.WaitOptions.waitOptions;
-import static java.time.Duration.ofMillis;
 @SuppressWarnings("unchecked")
 public class AndroidBase {
     AndroidDriver<AndroidElement> driver = DriverManager.getDriver();
@@ -37,8 +30,17 @@ public class AndroidBase {
         element.click();
     }
 
+    public List<AndroidElement> findElements(String xpath) {
+        return driver.findElements(By.xpath(xpath));
+    }
+
     public String getTextId(String id) {
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.id(id)));
+        return element.getText();
+    }
+
+    public String getText(String xpath) {
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
         return element.getText();
     }
 
@@ -68,6 +70,24 @@ public class AndroidBase {
         WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(id)));
         element.sendKeys(text);
     }
+    public void submitId(String id) {
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(id)));
+        element.submit();
+    }
+
+    public void sendEnter(String xpath) {
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+        element.sendKeys(Keys.ENTER);
+    }
+    public void sendEnterId(String id) {
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(id)));
+        element.sendKeys(Keys.ENTER);
+    }
+
+    public void submit(String xpath) {
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+        element.submit();
+    }
     public void  fastTypeId (String id, String text) {
         WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(id)));
         element.sendKeys(text);
@@ -94,9 +114,9 @@ public class AndroidBase {
 
     }
 
-    public void scrollH(String text) throws InterruptedException {
+    public void scrollH(String xpath,String text) throws InterruptedException {
         driver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true)."
-                + "resourceId(\"com.mcdo.mcdonalds_debug.debug:id/homeTabLayout\"))"
+                + "resourceId(\""+xpath+"\"))"
                 + ".setAsHorizontalList().scrollIntoView(new UiSelector().text(\""+text+"\"))");
     }
 

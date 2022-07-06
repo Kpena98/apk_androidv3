@@ -1,0 +1,36 @@
+[
+  {
+    "Pais": "Puerto Rico",
+    "User": "pruebaautoqapuer@gmail.com",
+    "Pass": "Pruebas_2022",
+    "Direccion": "1057 PR-25, San Juan",
+    "Categoria": "McCombos Carne",
+    "Producto": "McCombo Grande Big Mac",
+    "Bebida": "Diet Coke",
+    "Ingrediente": "Salsa",
+    "IngredienteExtra": "Queso Americano",
+    "Codigo": "TSOFT",
+    "TipoPago": "CreditCard",
+    "NumeroTarjeta": "4111111111111111",
+    "FechaVencimiento": "12/22",
+    "CodigoSeguridad": "123",
+    "NombreTarjeta": "APRO"
+  },
+  {
+    "Pais": "Panamá",
+    "User": "pruebaautoqapan@gmail.com",
+    "Pass": "Pruebas_2022",
+    "Direccion": "Av. 4a D Sur 6201",
+    "Categoria": "McCombos",
+    "Producto": "Cajita Feliz McNuggets+Papas Chicas",
+    "Bebida": "Agua",
+    "Ingrediente": "Sal",
+    "IngredienteExtra": "Queso amarillo",
+    "Codigo": "TSOFT",
+    "TipoPago": "creditCard",
+    "NumeroTarjeta": "4111111111111111",
+    "FechaVencimiento": "12/22",
+    "CodigoSeguridad": "123",
+    "NombreTarjeta": "APRO"
+  }
+]

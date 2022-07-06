@@ -1,0 +1,36 @@
+[
+  {
+  "Pais": "Argentina",
+  "User": "pruebaautoqa@gmail.com",
+  "Pass": "Pruebas_2022",
+  "Direccion": "Av. del Libertador 2800, Olivos",
+  "Categoria": "McCombos",
+  "Producto": "Big Mac McCombo Grande",
+  "Bebida": "Coca Cola",
+  "Ingrediente": "Salsa Big Mac",
+  "IngredienteExtra": "Queso Cheddar",
+  "Codigo": "TSOFT",
+  "TipoPago": "Mercado Pago",
+  "NumeroTarjeta": "5416752602582580",
+  "FechaVencimiento": "11/25",
+  "CodigoSeguridad": "123",
+  "NombreTarjeta": "APRO"
+  },
+  {
+    "Pais": "Chile",
+    "User": "pruebaautoqachi@gmail.com",
+    "Pass": "Pruebas_2022",
+    "Direccion": "Paseo Ahumada 100",
+    "Categoria": "McCombos",
+    "Producto": "McCombo Grande BigMac",
+    "Bebida": "Coca-Cola Original",
+    "Ingrediente": "Salsa Big Mac",
+    "IngredienteExtra": "Queso Cheddar",
+    "Codigo": "TSOFT",
+    "TipoPago": "card",
+    "NumeroTarjeta": "5416752602582580",
+    "FechaVencimiento": "11/25",
+    "CodigoSeguridad": "123",
+    "NombreTarjeta": "APRO"
+  }
+]

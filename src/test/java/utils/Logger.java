@@ -1,6 +1,7 @@
 package utils;
 
 import driver.BrowserStackHelper;
+import exceptions.ElementoNoVisibleException;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
@@ -9,7 +10,7 @@ public class Logger {
 
     private static org.slf4j.Logger log;
 
-    public static void iniciarLog(String nombreTest, String ejecucion) throws IOException {
+    public static void iniciarLog(String nombreTest, String ejecucion) throws IOException, ElementoNoVisibleException {
         ExtentReportHelper.startReport( ejecucion, "Mc Donalds Ecommerce", "QA");
         ExtentReportHelper.creteNameTest(nombreTest);
         log = LoggerFactory.getLogger(utils.Logger.class);

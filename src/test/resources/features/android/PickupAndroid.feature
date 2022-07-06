@@ -4,7 +4,7 @@ Feature: Flujo Pickup Android
 		#@PRECOND_LB-1012
 		Given Abrir Aplicacion en BrowserStack
 
-	@TEST_LB-1015
+	
 	Scenario Outline: flujo de pedido pickup con usuario registrado en "<Pais>"
 		And Seleccionar "<Pais>"
 		    And Presionar boton Next luego de elegir "<Pais>"

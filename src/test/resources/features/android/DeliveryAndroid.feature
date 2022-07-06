@@ -4,7 +4,7 @@ Feature: Flujo  Delivery Android
 		#@PRECOND_LB-1012
 		Given Abrir Aplicacion en BrowserStack
 
-	@TEST_LB-1011
+	
 	Scenario Outline: flujo de pedido delivery con usuario registrado en "<Pais>"
 		And Seleccionar "<Pais>"
 		    And Presionar boton Next luego de elegir "<Pais>"
